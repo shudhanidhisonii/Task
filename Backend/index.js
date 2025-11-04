@@ -16,15 +16,11 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 app.use(cors({
-  origin:'https://profound-froyo-7b3e3f.netlify.app',
+  origin:'http://localhost:5173',
   credentials: true, 
 }));
 const PORT =process.env.PORT|| 3000;
 const DB_URI= process.env.MONGO_URI;
-
-app.get("/", (req, res) => {
-  res.redirect("https://profound-froyo-7b3e3f.netlify.app/");
-});
 app.use("/summarize", summaryRoute);
 
 try{
