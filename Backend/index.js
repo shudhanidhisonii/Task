@@ -15,14 +15,21 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
-app.use(cors({
-    origin: [
-      "http://localhost:5173",
-      "https://your-frontend-name.onrender.com" 
-    ],
+// app.use(cors({
+//     origin: [
+//       "http://localhost:5173",
+//       "https://your-frontend-name.onrender.com" 
+//     ],
   
-  credentials: true, 
+//   credentials: true, 
+// }));
+app.use(cors({
+  origin: "https://profound-froyo-7b3e3f.netlify.app", // ✅ your Netlify URL
+  credentials: true, // ✅ allow cookies to pass
 }));
+
+
+
 const PORT =process.env.PORT|| 3000;
 const DB_URI= process.env.MONGO_URI;
 app.use("/summarize", summaryRoute);

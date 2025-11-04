@@ -26,11 +26,19 @@ export const signup = async (req, res) => {
       { expiresIn: "10h" }
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "lax",
-      maxAge: 10 * 60 * 60 * 1000,
-    });
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   sameSite: "lax",
+    //   maxAge: 10 * 60 * 60 * 1000,
+    // });
+
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,        // ✅ only send over HTTPS
+  sameSite: "none",    // ✅ required for cross-site (Netlify ↔ Render)
+  maxAge: 10 * 60 * 60 * 1000,
+});
+
 
     console.log("Signup Token:", token);
 
