@@ -13,7 +13,7 @@ export const summarizeText = async (req, res) => {
 
   try {
     const response = await axios.post(
-      "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
+      "https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn",
       { inputs: text },
       {
         headers: {

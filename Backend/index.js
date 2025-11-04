@@ -30,6 +30,11 @@ try{
 catch(e){
     console.error(e)
 }
+
+app.get("/", (req, res) => {
+  res.redirect("https://profound-froyo-7b3e3f.netlify.app/");
+});
+
 app.use("/user",userRoute)
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
