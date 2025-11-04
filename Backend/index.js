@@ -24,7 +24,7 @@ app.use(cookieParser())
 //   credentials: true, 
 // }));
 app.use(cors({
-  origin: "https://storied-bonbon-29e74e.netlify.app/", // ✅ your Netlify URL
+  origin: "https://storied-bonbon-29e74e.netlify.app", // ✅ your Netlify URL
   credentials: true, // ✅ allow cookies to pass
 }));
 
