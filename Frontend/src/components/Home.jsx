@@ -15,7 +15,7 @@ const Home = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/summarize", { text: inputText });
+      const res = await axios.post("https://task-8-itgs.onrender.com/summarize", { text: inputText });
       console.log("Response from backend:", res.data);
 
       if (res.data && res.data.summary) {

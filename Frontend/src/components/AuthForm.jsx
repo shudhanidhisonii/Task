@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import './AuthForm.css';
 
 const AuthForm = () => {
-  const [isActive, setIsActive] = useState(false); // animation toggle
+  const [isActive, setIsActive] = useState(false); 
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const BASE_URL = 'http://localhost:5000'; // change when deployed
+  const BASE_URL = 'https://task-8-itgs.onrender.com'; 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -42,6 +42,7 @@ const AuthForm = () => {
       toast.error(err.response?.data?.message || 'Registration failed');
     }
   };
+
 
   return (
     <div className="papa">
