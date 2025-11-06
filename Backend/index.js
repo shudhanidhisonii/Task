@@ -9,30 +9,38 @@ import userRoute from "./route/user.route.js"
 
 
 import summaryRoute from "./route/summaryroute.js";
+import historyRoute from "./route/historyRoute.js";
+import articleRoute from "./route/articleRoute.js";
 
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
-// app.use(cors({
-//     origin: [
-//       "http://localhost:5173",
-//       "https://your-frontend-name.onrender.com" 
-//     ],
-  
-//   credentials: true, 
-// }));
 app.use(cors({
-  origin: "https://task-9-p1r2.onrender.com", // ✅ your Netlify URL
-  credentials: true, // ✅ allow cookies to pass
+    origin: [
+     //"http://localhost:5173",
+     "https://your-frontend-name.onrender.com" 
+    ],
+  
+  credentials: true, 
 }));
+// app.use(cors({
+//   origin: "https://task-9-p1r2.onrender.com", // ✅ your Netlify URL
+//   credentials: true, // ✅ allow cookies to pass
+// }));
 
 
 
 const PORT =process.env.PORT|| 3000;
 const DB_URI= process.env.MONGO_URI;
 app.use("/summarize", summaryRoute);
+app.use("/api/history", historyRoute);
+app.use("/api/article", articleRoute);
+app.use("/user", userRoute);
+
+
+
 
 try{
   await  mongoose.connect(DB_URI)

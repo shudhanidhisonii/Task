@@ -1,0 +1,63 @@
+.history-page {
+  min-height: 100vh;
+  background-color: #0d0d0d;
+  color: #fff;
+  padding: 50px 40px;
+  font-family: "Poppins", sans-serif;
+}
+
+.history-page h2 {
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: #00bfa6;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(0, 191, 166, 0.4);
+}
+
+.history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.history-card {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.history-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.1);
+}
+
+.history-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #ddd;
+  margin-bottom: 8px;
+}
+
+.history-card strong {
+  color: #00bfa6;
+}
+
+.history-card small {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #888;
+  text-align: right;
+}
+
+.history-page p {
+  text-align: center;
+  color: #bbb;
+  font-size: 15px;
+}

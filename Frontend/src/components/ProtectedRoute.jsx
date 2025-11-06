@@ -4,23 +4,26 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
   const [isAuth, setIsAuth] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("https://task-8-itgs.onrender.com/user/verify", {
+        const res = await axios.get("http://localhost:5000/user/me", {
           withCredentials: true,
         });
-        if (res.status === 200) {
+        if (res.data?._id) {
+          setUser(res.data);
           setIsAuth(true);
         } else {
           setIsAuth(false);
         }
       } catch (err) {
-        setIsAuth(false);
-      }
-    };
+  console.log("Auth error:", err.response?.status, err.response?.data);
+  setIsAuth(false);
+}
 
+    };
     checkAuth();
   }, []);
 

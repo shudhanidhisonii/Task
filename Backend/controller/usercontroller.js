@@ -2,17 +2,37 @@ import User from "../model/usermodel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+// ✅ Signup Controller with strong password validation
 export const signup = async (req, res) => {
   try {
-    const { fullname, email, password } = req.body;
+    const { fullname, email, password, confirmPassword } = req.body;
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+
+    // Strong password regex
+    const passwordRegex =
+      /^(?=[A-Za-z])(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({
+        message:
+          "Password must start with a letter, be at least 8 characters, and include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&).",
+      });
+    }
+
+    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
+    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
+    // Create user
     const createdUser = new User({
       fullname,
       email,
@@ -20,25 +40,26 @@ export const signup = async (req, res) => {
     });
     await createdUser.save();
 
+    // JWT with _id
     const token = jwt.sign(
-      { id: createdUser._id, email: createdUser.email },
+      { _id: createdUser._id, email: createdUser.email },
       process.env.JWT_SECRET,
       { expiresIn: "10h" }
     );
 
+    // Set cookie
     // res.cookie("token", token, {
     //   httpOnly: true,
     //   sameSite: "lax",
-    //   maxAge: 10 * 60 * 60 * 1000,
+    //   secure: false, // false for localhost
+    //   maxAge: 10 * 60 * 60 * 1000, // 10 hours
     // });
-
 res.cookie("token", token, {
   httpOnly: true,
   secure: true,        // ✅ only send over HTTPS
   sameSite: "none",    // ✅ required for cross-site (Netlify ↔ Render)
   maxAge: 10 * 60 * 60 * 1000,
 });
-
 
     console.log("Signup Token:", token);
 
@@ -56,6 +77,7 @@ res.cookie("token", token, {
   }
 };
 
+// Login Controller
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -69,17 +91,27 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
+    // JWT with _id
     const token = jwt.sign(
-      { id: user._id, email: user.email },
+      { _id: user._id, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "10h" }
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "lax",
-      maxAge: 10 * 60 * 60 * 1000,
-    });
+    //  Set cookie
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   sameSite: "lax",
+    //   secure: false, // false for localhost
+    //   maxAge: 10 * 60 * 60 * 1000,
+    // });
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,        // ✅ only send over HTTPS
+  sameSite: "none",    // ✅ required for cross-site (Netlify ↔ Render)
+  maxAge: 10 * 60 * 60 * 1000,
+});
+
 
     console.log("Login Token:", token);
 
@@ -97,6 +129,7 @@ export const login = async (req, res) => {
   }
 };
 
+//  Verify Token
 export const verifyToken = (req, res) => {
   const token = req.cookies.token;
   if (!token) return res.status(401).json({ message: "No token, unauthorized" });

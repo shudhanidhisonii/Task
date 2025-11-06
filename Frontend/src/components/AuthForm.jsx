@@ -11,7 +11,8 @@ const AuthForm = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const BASE_URL = 'https://task-8-itgs.onrender.com'; 
+  // const BASE_URL = 'https://task-8-itgs.onrender.com'; 
+  const BASE_URL = 'http://localhost:5000';
 
   const handleLogin = async (e) => {
     e.preventDefault();
