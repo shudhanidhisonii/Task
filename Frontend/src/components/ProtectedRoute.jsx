@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/user/me", {
+        const res = await axios.get("https://task-10-rzc3.onrender.com/user/me", {
           withCredentials: true,
         });
         if (res.data?._id) {

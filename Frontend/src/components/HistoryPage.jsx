@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import "./HistoryPage.css";
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL || "https://task-10-rzc3.onrender.com";
 
 const History = () => {
   const [history, setHistory] = useState([]);

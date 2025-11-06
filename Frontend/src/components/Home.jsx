@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL || "https://task-10-rzc3.onrender.com";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");

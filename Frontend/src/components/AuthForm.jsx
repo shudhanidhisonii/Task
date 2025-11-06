@@ -12,7 +12,7 @@ const AuthForm = () => {
   const navigate = useNavigate();
 
   // const BASE_URL = 'https://task-8-itgs.onrender.com'; 
-  const BASE_URL = 'http://localhost:5000';
+  const BASE_URL = 'https://task-10-rzc3.onrender.com';
 
   const handleLogin = async (e) => {
     e.preventDefault();
