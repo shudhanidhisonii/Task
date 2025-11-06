@@ -20,7 +20,8 @@ app.use(cookieParser())
 app.use(cors({
     origin: [
      //"http://localhost:5173",
-     "https://your-frontend-name.onrender.com" 
+     "https://task-11-v597.onrender.com" ,
+      
     ],
   
   credentials: true, 
